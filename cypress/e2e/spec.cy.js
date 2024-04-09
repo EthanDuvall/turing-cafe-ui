@@ -28,8 +28,10 @@ describe("empty spec", () => {
     cy.get(".resy-form").get("input").eq(0).type("Ethan");
     cy.get(".resy-form").get("input").eq(1).type("9/4");
     cy.get(".resy-form").get("input").eq(2).type("12:00");
-    cy.get(".resy-form").get("input").eq(3).type("1");
-    cy.get(".resy-form").get("input").eq(4).click().click();
+    cy.get(".resy-form").get("input").eq(3).type("4");
+    cy.get(".resy-form").get("input").eq(4).click()
+    cy.intercept("post","http://localhost:3001/api/v1/reservations")
+    
     cy.get('.resy-container').last().contains("Ethan")
   })
 });

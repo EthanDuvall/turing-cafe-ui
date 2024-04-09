@@ -23,14 +23,21 @@ function App() {
   }, []);
 
   function addReservation(name, date, time, number) {
-    let newCard = {
-      id: Date.now(),
-      name,
-      date,
-      time,
-      number
-    };
-    setReservations([...reservations, newCard]);
+    fetch("http://localhost:3001/api/v1/reservations", {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        date,
+        time,
+        number,
+      }),
+    }).catch((err) => {
+      console.log(err);
+    });
+    setReservations([...reservations,{id:Date.now(),name, date,time,number}])
   }
 
   return (
