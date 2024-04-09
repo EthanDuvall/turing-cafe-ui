@@ -1,16 +1,49 @@
-import './App.css';
-import React from 'react';
-
+import "./App.css";
+import { React, useEffect, useState } from "react";
+import Form from "./Form/Form";
+import Reservations from "./Reservations/Reservations";
+import Card from "./Card/Card";
 function App() {
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/v1/reservations")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setReservations(data);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+      });
+  }, []);
+
+  function addReservation(name, date, time, number) {
+    let newCard = {
+      id: Date.now(),
+      name,
+      date,
+      time,
+      number
+    };
+    setReservations([...reservations, newCard]);
+  }
+
   return (
     <div className="App">
-      <h1 className='app-title'>Turing Cafe Reservations</h1>
-      <div className='resy-form'>
+      <h1 className="app-title">Turing Cafe Reservations</h1>
+      <div className="resy-form">
+        <Form addReservation={addReservation} />
       </div>
-      <div className='resy-container'>
+      <div className="resy-container">
+        <Reservations reservations={reservations} />
       </div>
     </div>
   );
 }
 
-export default App; 
+export default App;

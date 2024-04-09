@@ -17,3 +17,31 @@
   font-family: 'Pacifico', cursive;
   font-size: 50px;
 }
+.resy-container{
+
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 200px 200px 200px 200px 200px;
+  width: 100%;
+  grid-column-gap: 5%;
+  grid-row-gap: 5%;
+}
+.card{
+  background-color: white;
+  border:solid;
+  border-color:aqua;
+  border-width: 5px;
+  width: 200px;
+}
+
+form{
+  display: flex;
+  justify-content: space-evenly;
+}
+.resy-form{
+  width: 100%;
+}
+input{
+  height: 30px;
+  width: 200px;
+}
